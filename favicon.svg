@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- 家の形（グリーン系） -->
+  <!-- 屋根 -->
+  <polygon points="32,6 6,30 12,30 12,58 52,58 52,30 58,30" fill="#2E8B57"/>
+  <!-- 煙突 -->
+  <rect x="40" y="10" width="7" height="16" fill="#3D9970"/>
+  <!-- 壁 -->
+  <rect x="14" y="30" width="36" height="26" fill="#FFFFFF"/>
+  <!-- 扉 -->
+  <rect x="26" y="40" width="12" height="18" rx="6" fill="#2E8B57"/>
+  <!-- 窓（左） -->
+  <rect x="16" y="34" width="9" height="9" rx="2" fill="#A8D5B5"/>
+  <!-- 窓（右） -->
+  <rect x="39" y="34" width="9" height="9" rx="2" fill="#A8D5B5"/>
+  <!-- ドアノブ -->
+  <circle cx="36" cy="50" r="1.5" fill="#F39C12"/>
+</svg>
