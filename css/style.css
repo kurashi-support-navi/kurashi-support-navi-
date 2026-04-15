@@ -235,7 +235,7 @@ main {
 
 
 /* --------------------------------------------------------------------------
-   ランキングセクション
+   ランキングセクション（比較サイト強化版）
    -------------------------------------------------------------------------- */
 .ranking-section {
   padding: 56px 0 64px;
@@ -243,52 +243,64 @@ main {
 }
 
 .service-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 32px;
 }
 
+/* ランキングカード本体 */
 .service-card {
   background-color: var(--color-white);
   border-radius: var(--radius-md);
-  padding: 20px;
+  box-shadow: 0 3px 16px rgba(46,139,87,0.12);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 6px 24px rgba(46,139,87,0.2);
+  transform: translateY(-2px);
+}
+
+/* 1位は強調 */
+.service-card:first-child {
+  border: 2px solid #c0a000;
+}
+
+/* カードヘッダー（ランク帯） */
+.service-card-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  border-left: 4px solid var(--color-main);
+  gap: 12px;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(90deg, var(--color-sub) 0%, #fff 100%);
 }
 
 .service-card-rank {
-  font-size: 26px;
+  font-size: 13px;
   font-weight: 900;
-  min-width: 36px;
-  text-align: center;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
-.service-card-rank.r1 { color: #c0a000; }
-.service-card-rank.r2 { color: #9e9e9e; }
-.service-card-rank.r3 { color: #b07040; }
-.service-card-rank.r4 { color: var(--color-main); }
-.service-card-rank.r5 { color: var(--color-main); }
+.service-card-rank.r1 { background: linear-gradient(135deg, #c0a000, #f0d060); }
+.service-card-rank.r2 { background: linear-gradient(135deg, #7a7a7a, #c0c0c0); }
+.service-card-rank.r3 { background: linear-gradient(135deg, #8b5020, #c07040); }
+.service-card-rank.r4 { background: var(--color-main); }
+.service-card-rank.r5 { background: var(--color-main); }
 
-.service-card-info {
+.service-card-header-info {
   flex: 1;
-}
-
-.service-card-info h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0 0 4px;
-  color: var(--color-text);
-}
-
-.service-card-info p {
-  font-size: 12px;
-  color: #777;
-  margin: 0 0 8px;
-  line-height: 1.6;
 }
 
 .service-card-badge {
@@ -298,24 +310,93 @@ main {
   color: var(--color-main);
   padding: 2px 8px;
   border-radius: 99px;
-  margin-bottom: 4px;
   font-weight: 700;
+  margin-bottom: 4px;
 }
 
-.service-card-btn {
-  display: inline-block;
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 12px;
+.service-card-header-info h3 {
+  font-size: 17px;
   font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 99px;
-  text-decoration: none;
-  white-space: nowrap;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* 星評価 */
+.service-card-stars {
+  font-size: 16px;
+  color: #f5a623;
+  letter-spacing: 1px;
   flex-shrink: 0;
 }
 
-.service-card-btn:hover { opacity: 0.85; }
+/* カードボディ */
+.service-card-body {
+  padding: 14px 16px;
+}
+
+.service-card-info {
+  flex: 1;
+}
+
+.service-card-info p {
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 10px;
+  line-height: 1.7;
+}
+
+/* おすすめポイント */
+.service-card-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.service-card-points li {
+  font-size: 13px;
+  color: var(--color-text);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.service-card-points li::before {
+  content: "✓";
+  color: var(--color-main);
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+}
+
+/* CTAボタン */
+.service-card-btn {
+  display: block;
+  background: linear-gradient(135deg, #27ae60, var(--color-main));
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 20px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 0.04em;
+  box-shadow: 0 3px 10px rgba(46,139,87,0.3);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.service-card-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 1位のボタンはオレンジ */
+.service-card:first-child .service-card-btn {
+  background: linear-gradient(135deg, #e67e22, var(--color-accent));
+  box-shadow: 0 3px 10px rgba(243,156,18,0.35);
+}
 
 
 /* --------------------------------------------------------------------------
@@ -375,30 +456,32 @@ main {
   background-color: var(--color-bg);
 }
 
-/* 記事カードグリッド（スマホ：1列） */
+/* 記事リスト */
 .article-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  border-top: 1px solid var(--color-border);
 }
 
-/* 記事カード */
+/* 記事行 */
 .article-card {
-  background-color: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s ease;
 }
 
 .article-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
+  background-color: var(--color-sub);
 }
 
 .card-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 8px;
   color: var(--color-text);
 }
 
@@ -406,102 +489,62 @@ main {
   opacity: 1;
 }
 
-/* カードサムネイル */
+/* サムネイルは非表示 */
 .card-thumb {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
+  display: none;
 }
 
-.card-thumb-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--color-sub) 0%, #A8D5B5 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-thumb-placeholder--compare {
-  background: linear-gradient(135deg, #E8F5EE 0%, #A8D5B5 100%);
-}
-.card-thumb-placeholder--guide {
-  background: linear-gradient(135deg, #FFF3CD 0%, #F5C842 40%, #E8F5EE 100%);
-}
-.card-thumb-placeholder--review {
-  background: linear-gradient(135deg, #E8F5EE 0%, #B8DCC8 100%);
-}
-.card-thumb-placeholder--price {
-  background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 50%, #E8F5EE 100%);
-}
-
-/* サムネイル内カテゴリラベル */
-.thumb-label {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--color-main);
-  background-color: rgba(255,255,255,0.85);
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.05em;
-  margin-bottom: 10px;
-}
-
-.thumb-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1a4a2e;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-}
-
+.card-thumb-placeholder,
+.card-thumb-placeholder--compare,
+.card-thumb-placeholder--guide,
+.card-thumb-placeholder--review,
+.card-thumb-placeholder--price,
+.thumb-label,
+.thumb-title,
 .thumb-icon {
-  position: absolute;
-  bottom: 12px;
-  right: 16px;
-  font-size: 36px;
-  opacity: 0.4;
+  display: none;
 }
 
 .card-body {
-  padding: 16px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 0;
 }
 
 .card-category {
   display: inline-block;
   background-color: var(--color-sub);
   color: var(--color-main);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 20px;
   letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .card-title {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.55;
-  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
   color: var(--color-text);
+  flex: 1;
 }
 
+/* 概要文・続きを読むは非表示 */
 .card-excerpt {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.75;
-  margin-bottom: 14px;
+  display: none;
 }
 
 .card-read-more {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--color-main);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 
@@ -895,10 +938,22 @@ main {
   }
 
   .service-cards {
-    grid-template-columns: 1fr;
-    max-width: 640px;
+    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .service-card-header {
+    padding: 16px 20px 14px;
+  }
+
+  .service-card-body {
+    padding: 16px 20px 20px;
+  }
+
+  .service-card-btn {
+    font-size: 16px;
+    padding: 14px 24px;
   }
 
   .category-cards {
