@@ -748,6 +748,53 @@ main {
   background-color: var(--color-sub);
 }
 
+/* レスポンシブ比較表：モバイルでカード型に切替 */
+@media (max-width: 767px) {
+  .compare-table.responsive-card thead { display: none; }
+  .compare-table.responsive-card,
+  .compare-table.responsive-card tbody,
+  .compare-table.responsive-card tr,
+  .compare-table.responsive-card td { display: block; width: 100%; }
+  .compare-table.responsive-card tr {
+    margin-bottom: 16px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .compare-table.responsive-card td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+  }
+  .compare-table.responsive-card td:last-child { border-bottom: none; }
+  .compare-table.responsive-card td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #6b7a99;
+    flex-shrink: 0;
+    margin-right: 12px;
+    min-width: 80px;
+  }
+  .compare-table.responsive-card td:first-child {
+    background: var(--color-main);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    justify-content: center;
+    padding: 12px 16px;
+  }
+  .compare-table.responsive-card td:first-child::before { display: none; }
+  .compare-table.responsive-card td:first-child a { color: #fff; }
+  .compare-table.responsive-card tr:nth-child(even) td { background: transparent; }
+  .compare-table.responsive-card tr:nth-child(even) td:first-child { background: var(--color-main); }
+}
+
 
 /* --------------------------------------------------------------------------
    関連記事セクション
